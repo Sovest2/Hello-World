@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Пять правил вёрстки</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image" href="favicon.ico">
+  </head>
+
+  <body>
+    <!-- Порядок расположения элементов на странице называют поток. Браузер читает код файла сверху вниз и так же отрисовывает страницу. Поэтому говорят, что элементы следуют друг за другом в потоке. -->
+    <header class="header">
+      <div class="overlay">
+        <h1 class="header-title">Пять правил вёрстки</h1>
+      </div>
+    </header>
+    <!--  Для создания секций и разделов применяют элемент section. Он ведёт себя как div, но сразу сообщает браузеру о своём предназначении — это позволит поисковикам качественнее прочитать ваш сайт. -->
+    <section class="content">
+      <div class="card no-left-margin">
+        <img src="empty.jpg" class="card-image" />
+        <h3 class="card-title">Пустота</h3>
+        <p class="card-text">
+          Простое правило, которое часто нарушают: ставить рядом элементы с
+          похожим смыслом и окружать их пустым пространством. Пустота — мощное
+          средство воздействия.
+        </p>
+      </div>
+
+      <div class="card no-right-margin">
+        <img src="grid.jpg" class="card-image" />
+        <h3 class="card-title">Сетка</h3>
+        <p class="card-text">
+          Размеры элементов и расстояния между ними укладываются в гармоничную
+          схему — её называют сеткой. Если элемент выпадает, зритель может это
+          заметить.
+        </p>
+      </div>
+
+      <div class="card no-left-margin">
+        <img src="font.jpg" class="card-image" />
+        <h3 class="card-title">Шрифты</h3>
+        <p class="card-text">
+          Не больше трёх шрифтов на сайт. Один для заголовков, второй — для всех
+          остальных текстов, третий — для выделения важных слов. Должно хватить.
+        </p>
+      </div>
+
+      <div class="card no-right-margin">
+        <img src="colors.jpg" class="card-image" />
+        <h3 class="card-title">Цвета</h3>
+        <p class="card-text">
+          Обычно на сайте два цвета: ведущий и акцентный. Подобрать удачную
+          цветовую пару можно за счёт насмотренности или специальных
+          инструментов.
+        </p>
+      </div>
+
+      <div class="card">
+        <img src="sameness.jpg" class="card-image" />
+        <h3 class="card-title">Единообразие</h3>
+        <p class="card-text">
+          Один из главных криетериев качественной верстки. Даже различающиеся
+          элементы сайта должны быть похожи или сочетаться.
+        </p>
+      </div>
+    </section>
+    <footer class="footer">
+      <h4 class="footer-author">Сделано руками | Hello World</h4>
+    </footer>
+  </body>
+</html>

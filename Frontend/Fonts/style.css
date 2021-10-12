@@ -1,0 +1,36 @@
+.root {
+  background-color: #1E1E1E;
+}
+
+.font-container {
+  width: 90%;
+  margin: auto;
+  color: #fff;
+  padding: 40px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.font-container:last-of-type {
+  border: none;
+}
+
+.font-container__text {
+  font-size: 90px;
+  margin: 0;
+}
+
+.font-container_font_ibm {
+  font-family: 'IBM Plex Serif', serif;
+}
+
+.font-container_font_ubuntu {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.font-container_font_istok {
+  font-family: 'Istok Web', sans-serif;
+}
+
+.font-container__text_weight_bold {
+  font-weight: bold;
+}

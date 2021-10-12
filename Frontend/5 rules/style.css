@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, p {
+    margin: 0;
+    font-weight: normal;
+}
+
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.header {
+    height: 100vh;
+    background-color: #eee;
+    background-image: url(rules.jpg);
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 120px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: auto;
+    width: 80%;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+}
+
+.content {
+    font-size: 0;
+    /* background-color: #8aafcf; */
+    width: 1100px;
+    margin: 100px auto 50px;
+    text-align: center;
+}
+
+.card {
+    width: 500px;
+    /*background-color: #e3f3ff; */
+    margin-bottom: 60px;
+    padding: 45px 45px 70px;
+    /*border: 2px dashed rgba(250, 50, 50, .4); */
+    display: inline-block;
+    box-shadow: 3px 0px 10px rgb(13, 13, 13, .3);
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: left;
+}
+
+.double-card {
+    width: 88%;
+    margin: 0;
+}
+
+.no-right-margin {
+    margin-right: 0;
+}
+
+.no-left-margin {
+    margin-left: 0;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+}
+
+.card-image {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.footer {
+    height: 300px;
+    background-color: black;
+    display: flex;
+}
+
+.footer-author {
+    color: white;
+    font-size: 24px;
+    margin: auto;
+}
