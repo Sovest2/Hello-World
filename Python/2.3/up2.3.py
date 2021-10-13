@@ -1,4 +1,4 @@
-import sys
+import os
 from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox
 
@@ -275,7 +275,7 @@ class MainWindow(QWidget):
         self.settingsButton = QPushButton("", self)
         self.settingsButton.setGeometry(270, 0, 30, 30)
         self.settingsButton.setStyleSheet(ButtonStyles.settings())
-        self.settingsButton.setIcon(QIcon("settings.png"))
+        self.settingsButton.setIcon(QIcon(os.path.dirname(__file__) + "/settings.png"))
         self.settingsButton.clicked.connect(self.settings_click)
 
     def button_click(self, char):
@@ -304,7 +304,7 @@ class MainWindow(QWidget):
         self.settings = SettingsWindow()
         self.close()
 
-app = QApplication(sys.argv)
+app = QApplication([])
 window = MainWindow()
 window.show()
 
