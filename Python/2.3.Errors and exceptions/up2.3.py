@@ -27,6 +27,7 @@ class ButtonStyles:
             border: 1px solid rgb(150, 150, 150);
             font-family: 'Roboto', sans-serif;
             font-size: 30px;
+            padding-bottom: 15px;
         }
         QPushButton:hover:pressed {
             background-color: rgb(230, 150, 0);
@@ -49,7 +50,7 @@ class ButtonStyles:
             background-color: rgb(200, 200, 200);
             border: 1px solid rgb(150, 150, 150);
             font-size: 25px;
-            padding-bottom: 5px;
+            padding-bottom: 7px;
         }
         QPushButton:hover:pressed {
             background-color: rgb(172, 172, 172);
@@ -139,7 +140,7 @@ class SettingsWindow(QWidget):
 
 
         self.exit_button = QPushButton("Назад",self)
-        self.exit_button.setGeometry(0, 420, 305, 30)
+        self.exit_button.setGeometry(0, 415, 305, 40)
         self.exit_button.setStyleSheet(ButtonStyles.delete())
         self.exit_button.clicked.connect(self.exit_click)
 
