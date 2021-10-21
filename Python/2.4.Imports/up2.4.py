@@ -1,7 +1,10 @@
 import sys
-from styles import *
+from datetime import date
+
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox, QListWidget
+
+from styles import *
 
 
 btn_w = 76
@@ -37,13 +40,21 @@ class SettingsWindow(QWidget):
         self.budget_edit = QLineEdit(f"{budget}", self)
         self.budget_edit.setGeometry(120, 20, 181, 21)
         self.budget_edit.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
-        
+
 
         self.days_spin = QSpinBox(self, value=days)
         self.days_spin.setGeometry(120, 60, 42, 22)
         self.days_spin.setRange(1, 31)
         self.days_spin.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
 
+        self.wastes_label = QLabel("История трат:", self)
+        self.wastes_label. setGeometry(0, 120, 305, 30)
+        self.wastes_label.setStyleSheet(TextStyles.title())
+
+        self.wastes_list = QListWidget(self)
+        self.wastes_list.setGeometry(0, 150, 305, 250)
+        self.wastes_list.setStyleSheet(TextStyles.subtitle())
+        self.wastes_list.addItems(wastes)
 
         self.exit_button = QPushButton("Назад",self)
         self.exit_button.setGeometry(0, 420, 305, 30)
@@ -68,13 +79,12 @@ class SettingsWindow(QWidget):
         global money
 
         try:
-            # изменение значений 
+            # изменение значений
             days = self.days_spin.value()
             budget = float(self.budget_edit.text())
 
         except ValueError:
             print("Возникла ошибка")
-            
         else:
             # Обновление данных в приложении
             money = round(budget/days, 2)
@@ -188,7 +198,7 @@ class MainWindow(QWidget):
     def button_click(self, char):
         global waste
         global money
-        
+
         if char == "\u2190":
             waste = waste[:-1]
         elif char == "↵":
@@ -198,15 +208,15 @@ class MainWindow(QWidget):
                 print("Число введено неверно")
             else:
                 money -= waste
-                wastes.append(waste)
-                self.money_label.setText(f"{money}")
+                wastes.append(f"{date.today()} - {waste}")
+                self.money_label.setText(f"{round(money,2)}")
             finally:
                 waste = ""
         else:
             waste+= char
 
         self.waste_label.setText(f"Потрачено:\n{waste}")
-        
+
     def settings_click(self):
         self.settings = SettingsWindow()
         self.close()

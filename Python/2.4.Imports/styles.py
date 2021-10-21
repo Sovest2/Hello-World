@@ -3,8 +3,8 @@ DESCRIPTION_TEXT_COLOR = "rgb(172, 172, 172)"
 BASE_TEXT_COLOR = "rgb(255, 255, 255)"
 ACCENT_COLOR = "rgb(255, 170, 0)"
 
-class ButtonStyles:
 
+class ButtonStyles:
     def confirm():
         return """
         QPushButton {
@@ -17,7 +17,6 @@ class ButtonStyles:
             background-color: rgb(230, 150, 0);
         }
         """
-
     def settings():
         return """
         QPushButton {
@@ -28,7 +27,6 @@ class ButtonStyles:
             background-color: rgb(172, 172, 172);
         }
         """
-
     def delete():
         return """
         QPushButton {
@@ -41,7 +39,6 @@ class ButtonStyles:
             background-color: rgb(172, 172, 172);
         }
         """
-
     def base():
         return """
         QPushButton {
@@ -54,7 +51,6 @@ class ButtonStyles:
             background-color: rgb(172, 172, 172);
         }
         """
-
     def enter():
         return """
         QPushButton {
@@ -69,25 +65,22 @@ class ButtonStyles:
             background-color: rgb(230, 150, 0);
         }
         """
-
-
 class TextStyles:
-
     def title():
         return """
         color: rgb(255, 255, 255);
         padding-left: 10px;
         """
-
     def subtitle():
         return """
         color: rgb(172, 172, 172);
         padding-left: 17px;
         """
-
     def wasted():
         return """
         color: rgb(255, 255, 255);
         padding-left: 10px;
         border-top: 1px solid rgba(60,60,60, .8);
         """
+
+# print("Я прекрасен!")
