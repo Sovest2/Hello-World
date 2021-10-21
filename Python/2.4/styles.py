@@ -91,3 +91,5 @@ class TextStyles:
         padding-left: 10px;
         border-top: 1px solid rgba(60,60,60, .8);
         """
+
+# print("Я прекрасен!")

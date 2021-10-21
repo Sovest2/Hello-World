@@ -1,7 +1,10 @@
 import sys
-from styles import *
+from datetime import date
+
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox, QListWidget
+
+from styles import *
 
 
 btn_w = 76
@@ -44,6 +47,14 @@ class SettingsWindow(QWidget):
         self.days_spin.setRange(1, 31)
         self.days_spin.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
 
+        self.wastes_label = QLabel("История трат:", self)
+        self.wastes_label. setGeometry(0, 120, 305, 30)
+        self.wastes_label.setStyleSheet(TextStyles.title())
+
+        self.wastes_list = QListWidget(self)
+        self.wastes_list.setGeometry(0, 150, 305, 250)
+        self.wastes_list.setStyleSheet(TextStyles.subtitle())
+        self.wastes_list.addItems(wastes)
 
         self.exit_button = QPushButton("Назад",self)
         self.exit_button.setGeometry(0, 420, 305, 30)
@@ -198,8 +209,8 @@ class MainWindow(QWidget):
                 print("Число введено неверно")
             else:
                 money -= waste
-                wastes.append(waste)
-                self.money_label.setText(f"{money}")
+                wastes.append(f"{date.today()} - {waste}")
+                self.money_label.setText(f"{round(money,2)}")
             finally:
                 waste = ""
         else:
