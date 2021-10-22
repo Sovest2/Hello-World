@@ -1,5 +1,6 @@
 import sys
 from datetime import date
+import os
 
 from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox, QListWidget
@@ -48,21 +49,21 @@ class SettingsWindow(QWidget):
         self.days_spin.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
 
         self.wastes_label = QLabel("История трат:", self)
-        self.wastes_label. setGeometry(0, 120, 305, 30)
+        self.wastes_label. setGeometry(0, 120, 300, 30)
         self.wastes_label.setStyleSheet(TextStyles.title())
 
         self.wastes_list = QListWidget(self)
-        self.wastes_list.setGeometry(0, 150, 305, 250)
-        self.wastes_list.setStyleSheet(TextStyles.subtitle())
+        self.wastes_list.setGeometry(0, 150, 300, 250)
+        self.wastes_list.setStyleSheet(DesignStyles.list_widget())
         self.wastes_list.addItems(wastes)
 
         self.exit_button = QPushButton("Назад",self)
-        self.exit_button.setGeometry(0, 420, 305, 30)
+        self.exit_button.setGeometry(0, 420, 300, 30)
         self.exit_button.setStyleSheet(ButtonStyles.delete())
         self.exit_button.clicked.connect(self.exit_click)
 
         self.confirm_button = QPushButton("Применить",self)
-        self.confirm_button.setGeometry(0, 450, 305, 60)
+        self.confirm_button.setGeometry(0, 450, 300, 60)
         self.confirm_button.setStyleSheet(ButtonStyles.confirm())
         self.confirm_button.clicked.connect(self.confirm_click)
 
@@ -192,7 +193,7 @@ class MainWindow(QWidget):
         self.settingsButton = QPushButton("", self)
         self.settingsButton.setGeometry(270, 0, 30, 30)
         self.settingsButton.setStyleSheet(ButtonStyles.settings())
-        self.settingsButton.setIcon(QIcon("settings.png"))
+        self.settingsButton.setIcon(QIcon(os.path.dirname(__file__) + "/settings.png"))
         self.settingsButton.clicked.connect(self.settings_click)
 
     def button_click(self, char):

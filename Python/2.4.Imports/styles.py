@@ -12,21 +12,23 @@ class ButtonStyles:
             border: 1px solid rgb(150, 150, 150);
             font-family: 'Roboto', sans-serif;
             font-size: 30px;
+            padding-bottom: 15px;
         }
         QPushButton:hover:pressed {
             background-color: rgb(230, 150, 0);
         }
         """
+
     def settings():
         return """
         QPushButton {
-            background-color: rgb(200, 200, 200);
-            border: 1px solid rgb(150, 150, 150);
+            background-color: rgba(200, 200, 200, .0);
         }
         QPushButton:hover:pressed {
-            background-color: rgb(172, 172, 172);
+            background-color: rgba(200, 200, 200, .25);
         }
         """
+
     def delete():
         return """
         QPushButton {
@@ -39,6 +41,7 @@ class ButtonStyles:
             background-color: rgb(172, 172, 172);
         }
         """
+
     def base():
         return """
         QPushButton {
@@ -51,6 +54,7 @@ class ButtonStyles:
             background-color: rgb(172, 172, 172);
         }
         """
+
     def enter():
         return """
         QPushButton {
@@ -65,21 +69,37 @@ class ButtonStyles:
             background-color: rgb(230, 150, 0);
         }
         """
+
+
 class TextStyles:
     def title():
         return """
         color: rgb(255, 255, 255);
         padding-left: 10px;
         """
+
     def subtitle():
         return """
         color: rgb(172, 172, 172);
         padding-left: 17px;
         """
+
     def wasted():
         return """
         color: rgb(255, 255, 255);
         padding-left: 10px;
+        border-top: 1px solid rgba(60,60,60, .8);
+        """
+
+
+class DesignStyles:
+    def list_widget():
+        return """
+        color: rgb(172,172,172);
+        padding-left: 10px;
+        padding-top: 10px;
+        margin-top: 10px;
+        border: none;
         border-top: 1px solid rgba(60,60,60, .8);
         """
 
