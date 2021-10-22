@@ -1,4 +1,5 @@
 import sys
+import time
 from datetime import date
 
 from PyQt5.QtGui import QFont, QIcon
@@ -22,6 +23,8 @@ class SettingsWindow(QWidget):
     def __init__(self):
         super(SettingsWindow, self).__init__()
         self.setup()
+        self.click_time = time.time()
+        self.click_counter = 0
 
     def setup(self):
         self.setGeometry(window.geometry())
@@ -36,6 +39,7 @@ class SettingsWindow(QWidget):
         self.days_label  = QLabel("Дней выжить: ", self)
         self.days_label.setGeometry(0, 60, 111, 21)
         self.days_label.setStyleSheet(TextStyles.subtitle())
+        self.days_label.mousePressEvent = self.easter_egg
 
         self.budget_edit = QLineEdit(f"{budget}", self)
         self.budget_edit.setGeometry(120, 20, 181, 21)
@@ -67,6 +71,22 @@ class SettingsWindow(QWidget):
         self.confirm_button.clicked.connect(self.confirm_click)
 
         self.show()
+
+    def easter_egg(self,event):
+        now = time.time()
+        if (now - self.click_time < 2): 
+            self.click_counter += 1
+            self.click_time = now
+            if self.click_counter >= 10:
+                self.wastes_list.addItem("Привет, искатель пасхальных яиц, что же, я выжил и попался!")
+                self.click_counter = 0
+            print(self.click_counter)
+        else:
+            self.click_counter = 0
+            self.click_time = now
+        
+
+        
 
     def exit_click(self):
         self.close()
@@ -195,6 +215,23 @@ class MainWindow(QWidget):
         self.settingsButton.setIcon(QIcon("settings.png"))
         self.settingsButton.clicked.connect(self.settings_click)
 
+    def keyPressEvent(self, event):
+        if 48 <= event.key() <= 57:
+            # Нажата цифра
+            self.button_click(chr(event.key()))
+
+        elif event.key() == 46:
+            # Нажата точка
+            self.button_click(".")
+
+        elif event.key() == 16777219:
+            # backspace нажат
+            self.button_click("\u2190")
+
+        elif event.key() == 16777220:
+            # enter нажат
+            self.button_click("↵")
+
     def button_click(self, char):
         global waste
         global money
@@ -207,9 +244,10 @@ class MainWindow(QWidget):
             except ValueError:
                 print("Число введено неверно")
             else:
-                money -= waste
-                wastes.append(f"{date.today()} - {waste}")
-                self.money_label.setText(f"{round(money,2)}")
+                if(waste > 0):
+                    money -= waste
+                    wastes.append(f"{date.today()} - {waste}")
+                    self.money_label.setText(f"{round(money,2)}")
             finally:
                 waste = ""
         else:
