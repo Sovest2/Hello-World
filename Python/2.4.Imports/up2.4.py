@@ -248,6 +248,7 @@ class MainWindow(QWidget):
                     money -= waste
                     wastes.append(f"{date.today()} - {waste}")
                     self.money_label.setText(f"{round(money,2)}")
+
             finally:
                 waste = ""
         else:
