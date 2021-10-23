@@ -14,7 +14,7 @@ btn_h = 57
 
 
 budget = 11653
-days = 31
+days = 30
 money = round(budget/days, 2)
 waste = ""
 wastes = []
@@ -46,7 +46,6 @@ class SettingsWindow(QWidget):
         self.budget_edit.setGeometry(120, 20, 181, 21)
         self.budget_edit.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
 
-
         self.days_spin = QSpinBox(self, value=days)
         self.days_spin.setGeometry(120, 60, 42, 22)
         self.days_spin.setRange(1, 31)
@@ -73,9 +72,10 @@ class SettingsWindow(QWidget):
 
         self.show()
 
-    def easter_egg(self,event):
+
+    def easter_egg(self):
         now = time.time()
-        if (now - self.click_time < 2): 
+        if (now - self.click_time < 2):
             self.click_counter += 1
             self.click_time = now
             if self.click_counter >= 10:
@@ -85,31 +85,29 @@ class SettingsWindow(QWidget):
         else:
             self.click_counter = 0
             self.click_time = now
-        
 
-        
 
     def exit_click(self):
         self.close()
         window.setGeometry(self.geometry())
         window.show()
 
+
     def confirm_click(self):
         global days
         global budget
         global money
-
         try:
             # изменение значений
             days = self.days_spin.value()
             budget = float(self.budget_edit.text())
-
         except ValueError:
             print("Возникла ошибка")
         else:
             # Обновление данных в приложении
             money = round(budget/days, 2)
             window.money_label.setText(f"{money}")
+
 
 
 class MainWindow(QWidget):
@@ -233,15 +231,15 @@ class MainWindow(QWidget):
             # enter нажат
             self.button_click("↵")
 
+
     def button_click(self, char):
         global waste
         global money
-
         if char == "\u2190":
             waste = waste[:-1]
         elif char == "↵":
             try:
-                waste = float(waste)
+                waste = int(waste)
             except ValueError:
                 print("Число введено неверно")
             else:
@@ -249,13 +247,12 @@ class MainWindow(QWidget):
                     money -= waste
                     wastes.append(f"{date.today()} - {waste}")
                     self.money_label.setText(f"{round(money,2)}")
-
             finally:
                 waste = ""
         else:
             waste+= char
-
         self.waste_label.setText(f"Потрачено:\n{waste}")
+
 
     def settings_click(self):
         self.settings = SettingsWindow()
