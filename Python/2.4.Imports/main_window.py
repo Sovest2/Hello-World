@@ -1,114 +1,17 @@
-import sys
-import time
-from datetime import date
 import os
+from datetime import date
 
 from PyQt5.QtGui import QFont, QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QLineEdit, QSpinBox, QListWidget
+from PyQt5.QtWidgets import  QWidget, QPushButton, QLabel
 
 from styles import *
-
+import settings
+from settings_window import SettingsWindow
 
 btn_w = 76
 btn_h = 57
 
-
-budget = 11653
-days = 30
-money = round(budget/days, 2)
 waste = ""
-wastes = []
-
-
-class SettingsWindow(QWidget):
-    def __init__(self):
-        super(SettingsWindow, self).__init__()
-        self.setup()
-        self.click_time = time.time()
-        self.click_counter = 0
-
-    def setup(self):
-        self.setGeometry(window.geometry())
-        self.setFixedSize(300, 500)
-        self.setWindowTitle("Настройки")
-        self.setStyleSheet(f"background-color: {BACKGROUND_COLOR};")
-
-        self.budget_label = QLabel("Бюджет:", self)
-        self.budget_label.setGeometry(0, 20, 111, 21)
-        self.budget_label.setStyleSheet(TextStyles.subtitle())
-
-        self.days_label  = QLabel("Дней выжить: ", self)
-        self.days_label.setGeometry(0, 60, 111, 21)
-        self.days_label.setStyleSheet(TextStyles.subtitle())
-        self.days_label.mousePressEvent = self.easter_egg
-
-        self.budget_edit = QLineEdit(f"{budget}", self)
-        self.budget_edit.setGeometry(120, 20, 181, 21)
-        self.budget_edit.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
-
-        self.days_spin = QSpinBox(self, value=days)
-        self.days_spin.setGeometry(120, 60, 42, 22)
-        self.days_spin.setRange(1, 31)
-        self.days_spin.setStyleSheet(f"color:{BASE_TEXT_COLOR};")
-
-        self.wastes_label = QLabel("История трат:", self)
-        self.wastes_label. setGeometry(0, 120, 300, 30)
-        self.wastes_label.setStyleSheet(TextStyles.title())
-
-        self.wastes_list = QListWidget(self)
-        self.wastes_list.setGeometry(0, 150, 300, 250)
-        self.wastes_list.setStyleSheet(DesignStyles.list_widget())
-        self.wastes_list.addItems(wastes)
-
-        self.exit_button = QPushButton("Назад",self)
-        self.exit_button.setGeometry(0, 420, 300, 30)
-        self.exit_button.setStyleSheet(ButtonStyles.delete())
-        self.exit_button.clicked.connect(self.exit_click)
-
-        self.confirm_button = QPushButton("Применить",self)
-        self.confirm_button.setGeometry(0, 450, 300, 60)
-        self.confirm_button.setStyleSheet(ButtonStyles.confirm())
-        self.confirm_button.clicked.connect(self.confirm_click)
-
-        self.show()
-
-
-    def easter_egg(self):
-        now = time.time()
-        if (now - self.click_time < 2):
-            self.click_counter += 1
-            self.click_time = now
-            if self.click_counter >= 10:
-                self.wastes_list.addItem("Где деньги, Лебовски?")
-                self.click_counter = 0
-            print(self.click_counter)
-        else:
-            self.click_counter = 0
-            self.click_time = now
-
-
-    def exit_click(self):
-        self.close()
-        window.setGeometry(self.geometry())
-        window.show()
-
-
-    def confirm_click(self):
-        global days
-        global budget
-        global money
-        try:
-            # изменение значений
-            days = self.days_spin.value()
-            budget = float(self.budget_edit.text())
-        except ValueError:
-            print("Возникла ошибка")
-        else:
-            # Обновление данных в приложении
-            money = round(budget/days, 2)
-            window.money_label.setText(f"{money}")
-
-
 
 class MainWindow(QWidget):
 
@@ -125,7 +28,7 @@ class MainWindow(QWidget):
         subtitle_font = QFont('Roboto', 11, QFont.Weight.Normal)
 
         # Сколько можно потратить
-        self.money_label = QLabel(f"{money}", self)
+        self.money_label = QLabel(f"{settings.money}", self)
         self.money_label.setGeometry(0, 35, 300, 50)
         self.money_label.setStyleSheet(TextStyles.title())
         self.money_label.setFont(titile_font)
@@ -213,7 +116,7 @@ class MainWindow(QWidget):
         self.settingsButton.setStyleSheet(ButtonStyles.settings())
         self.settingsButton.setIcon(QIcon(os.path.dirname(__file__) + "/settings.png"))
         self.settingsButton.clicked.connect(self.settings_click)
-
+    
     def keyPressEvent(self, event):
         if 48 <= event.key() <= 57:
             # Нажата цифра
@@ -224,42 +127,36 @@ class MainWindow(QWidget):
             self.button_click(".")
 
         elif event.key() == 16777219:
-            # backspace нажат
+            # Нажат backspace
             self.button_click("\u2190")
-
+                    
         elif event.key() == 16777220:
-            # enter нажат
+            # Нажат enter 
             self.button_click("↵")
-
 
     def button_click(self, char):
         global waste
-        global money
+
         if char == "\u2190":
             waste = waste[:-1]
         elif char == "↵":
             try:
-                waste = int(waste)
+                waste = float(waste)
             except ValueError:
                 print("Число введено неверно")
             else:
-                if(waste > 0):
-                    money -= waste
-                    wastes.append(f"{date.today()} - {waste}")
-                    self.money_label.setText(f"{round(money,2)}")
+                if waste > 0:
+                    settings.money -= waste
+                    settings.wastes.append(f"{date.today()} - {waste}")
+                    self.money_label.setText(f"{round(settings.money,2)}")
             finally:
                 waste = ""
         else:
             waste+= char
-        self.waste_label.setText(f"Потрачено:\n{waste}")
 
+        self.waste_label.setText(f"Потрачено:\n{waste}")
 
     def settings_click(self):
         self.settings = SettingsWindow()
         self.close()
-
-app = QApplication(sys.argv)
-window = MainWindow()
-window.show()
-
-app.exec()
+        
