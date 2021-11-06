@@ -5,28 +5,30 @@ import json
 
 # try:
 #     # Работа с файлом
-#     pass 
+#     pass
 # finally:
 #     # закрытие файла
 #     file.close()
 
 # with open ("artists.txt", encoding= "utf-8") as file:
-    
-    # print(*file)
-    # print(file.read())
 
-    # content = file.read(5)
-    # print(content)
+#     print(*file)
+#     print(file.read())
 
-    # print(file.read(5))
-    # print(file.read(5))
+#     content = file.read(5)
 
-    # print(file.readline())
 
-    # for line in file:
-    #     print(line, end="")
+#     print(content)
 
-    # print(file.readlines())
+#     print(file.read(5))
+#     print(file.read(5))
+
+#     print(file.readline())
+
+#     for line in file:
+#         print(line, end="")
+
+#     print(file.readlines())
 
 # with open ("songs.txt", "w", encoding= "utf-8") as file:
 #     file.writelines(["Veridis Quo", "Robot rock"])
@@ -44,14 +46,14 @@ import json
 #             "Имя": "Банго Бэггинс",
 #         }
 #     ]
-# } 
+# }
 
-# with open("hobbits.json", "w", encoding="utf-8") as file:
+# with open("Python/2.5.Files/hobbits.json", "w", encoding="utf-8") as file:
 #     json.dump(hobbits, file, ensure_ascii=False, indent=4)
 
 # json_str = json.dumps(hobbits, ensure_ascii=False, indent=4)
 # print(json_str)
 
-# with open("hobbits.json", "r", encoding="utf-8") as file:
+# with open("Python/2.5.Files/hobbits.json", "r", encoding="utf-8") as file:
 #     hobbits = json.load(file)
-#     print(type(hobbits))
+#     print(hobbits)
