@@ -1,5 +1,5 @@
 import os
-from datetime import date
+from datetime import date, datetime
 
 from PyQt5.QtGui import QFont, QIcon
 from PyQt5.QtWidgets import  QWidget, QPushButton, QLabel
@@ -17,6 +17,15 @@ class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        if settings.last_date is None:
+            settings.last_date = date.today().strftime('%Y-%m-%d')
+        elif settings.last_date != date.today().strftime('%Y-%m-%d'):
+            difference = date.today() - datetime.strptime(settings.last_date, '%Y-%m-%d').date()
+            settings.update_date(difference.days)
+
+        
+
         self.setup()
 
     def setup(self):
@@ -150,6 +159,7 @@ class MainWindow(QWidget):
                     settings.money -= waste
                     settings.wastes.append(f"{date.today()} - {waste}")
                     self.money_label.setText(f"{round(settings.money,2)}")
+                    settings.save_data()
             finally:
                 waste = ""
         else:
