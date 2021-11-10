@@ -6,7 +6,8 @@ def save_data():
         "budget": budget,
         "days": days,
         "money": money,
-        "wastes": wastes
+        "wastes": wastes,
+        "last_date": last_date
     }
 
     with open(os.path.dirname(__file__) + "/settings.json", "w") as file:
@@ -17,6 +18,7 @@ def load_data():
     global days
     global money
     global wastes
+    global last_date
 
     path = os.path.dirname(__file__) + "/settings.json"
 
@@ -29,10 +31,21 @@ def load_data():
         days = data.get("days", 31)
         money = data.get("money", round(budget/days, 2))
         wastes = data.get("wastes", [])
+        last_date = data.get("last_date")
+
+def update_date(difference):
+    global days
+    global budget
+    global money
+
+    budget+=  money - round(budget/days, 2)
+    days-= difference
+    money = round(budget/days, 2)
 
 budget = 11653
 days = 31
 money = round(budget/days, 2)
 wastes = []
+last_date = None
 
 main_window = None
