@@ -1,43 +1,43 @@
 h1 {
-  font-size: 24px;
-  text-transform: uppercase;
   font-family: "Berlin Sans FB", serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 24px;
+  color: white;
   margin-bottom: 0;
   margin-top: 0;
   padding-top: 34px;
-  font-weight: normal;
-  color: white;
 }
 h2 {
-  font-size: 30px;
-  text-transform: uppercase;
   font-family: "Berlin Sans FB", sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: white;
   margin-top: 0;
   margin-bottom: 24px;
-  color: white;
 }
 
 img {
-  object-fit: cover;
   width: 230px;
   height: 230px;
   margin-bottom: 40px;
+  object-fit: cover;
 }
 
 p {
   font-family: "Verdana", sans-serif;
-  text-align: center;
   font-size: 18px;
+  text-align: center;
 }
 
 div {
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  background-color: #4fc3f7;
   width: 500px;
   height: 500px;
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  background-color: #4fc3f7;
   text-align: center;
-  margin: auto;
   margin-top: 15vh;
+  margin: auto;
 }
 
 h3 {
