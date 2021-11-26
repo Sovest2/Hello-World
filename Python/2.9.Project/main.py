@@ -48,7 +48,7 @@ for user in users:
     company_name = company.get("name", "Не указано")
 
     # Формируем заголовок файла
-    content = f"{name} <{email}> {time}\n{company}\n\nЗавершенные задачи:\n"
+    content = f"{name} <{email}> {time}\n{company_name}\n\nЗавершенные задачи:\n"
 
     # Отбираем задачи
     tasks = []
