@@ -10,7 +10,7 @@ def get_data_from_url(url):
     if responce.status_code != 200:
         print(f"Недоступен ресурс: {url}")
         exit()
-    
+
     return json.loads(responce.text)
 
 # Получаем данные
@@ -36,16 +36,16 @@ for user in users:
     username = user.get("username")
     if not username:
         print(f"Пропускаем пользователя без username(id:{user_id})")
-        continue 
+        continue
 
     # Первая строка
     name = user.get("name", "Без имени")
     email = user.get("email", "Не указан")
     time = datetime.datetime.now().strftime("%d.%m.%Y %H.%M")
-    
+
     # Вторая строка
     company = user.get("company", {"name": "Не указано"})
-    company_name = company.get("name", "Не указано") 
+    company_name = company.get("name", "Не указано")
 
     # Формируем заголовок файла
     content = f"{name} <{email}> {time}\n{company}\n\nЗавершенные задачи:\n"
@@ -59,7 +59,7 @@ for user in users:
             continue
 
         tasks.append(todos.pop(todo_id))
-    
+
     tasks.sort(key=lambda x: x["completed"], reverse= True)
 
     # Формируем задачи
@@ -74,9 +74,9 @@ for user in users:
             if(not completed and not isDivided):
                 content+="\nОставшиеся задачи:\n"
                 isDivided = True
-            
+
             content+=f'{task_name[0:50]}{"..." if len(task_name) > 50 else ""}\n'
-    
+
     # Преименовываем старые файлы
     filename = f"{directory+username}.txt"
     if os.path.exists(filename):
